@@ -19,7 +19,7 @@ function useSpotify(props) {
       }
       spotifyApi.setAccessToken(session.user.accessToken);
     }
-  }, [session])
+  }, [session, status])
 
   return spotifyApi;
 }
