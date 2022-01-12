@@ -65,11 +65,12 @@ function Center() {
         {
           loginMenu &&
           <ul className="flex flex-wrap items-center  bg-black text-white  opacity-90 hover:opacity-80 cursor-pointer p-2 pr-2 m-1 rounded-lg">
-            <li className="basis-full items-center text-center hover:text-white rounded border-indigo-600 ">
+            <li className="basis-full items-center text-center hover:text-white rounded">
               <button  onClick={() => signOut()}>
                 <p>Log out</p>
               </button >
             </li>
+            <hr className='border-t-[0.1px] border-white ' /> 
           </ul>
         }
       </header>
