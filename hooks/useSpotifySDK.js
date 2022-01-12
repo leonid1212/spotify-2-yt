@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { useSession } from "next-auth/react";
+import { useEffect, useState, useCallback } from "react";
 import useSpotify from "./useSpotify";
 
 
@@ -14,8 +13,6 @@ function useSpotifySDK(props) {
     setDeviceid(device_id);
   }, []);
 
-
- 
   const setPlayerDeviceCallback = useCallback(()=>{
     if (spotifyApi.getAccessToken()) {
       const script = document.createElement("script");
@@ -25,7 +22,6 @@ function useSpotifySDK(props) {
       document.body.appendChild(script);
 
       window.onSpotifyWebPlaybackSDKReady = () => {
-
         const player = new window.Spotify.Player({
           name: 'Web Playback SDK',
           getOAuthToken: cb => { cb(spotifyApi.getAccessToken()); },
