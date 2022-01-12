@@ -13,14 +13,15 @@ import {
 } from '@heroicons/react/solid';
 
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import { useSession } from "next-auth/react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
 import useSongInfo from "../hooks/useSongInfo";
 import useSpotify from '../hooks/useSpotify';
 import { debounce } from 'lodash';
-
+import { useSpotifySDKContext } from "../contexts/SpotifySDKContext";
+import { playlistState } from '../atoms/playlistAtom';
 
 
 function Player() {
@@ -31,6 +32,8 @@ function Player() {
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
   const [volume, setVolume] = useState(50);
   const songInfo = useSongInfo();
+  const { deviceid, loading } = useSpotifySDKContext();
+  const playList = useRecoilValue(playlistState);
 
   const fetchCurrentSong = () => {
     if (!songInfo) {
@@ -45,17 +48,26 @@ function Player() {
   }
 
   const handlePlayPause = () => {
+    let fistItemTrack = playList?.tracks.items[0].track || false;
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
-      if ( data && data.body && data.body.is_playing) {
-        spotifyApi.pause();
-        setIsPlaying(false);
-      } else {
-        spotifyApi.play();
-        setIsPlaying(true);
-      }
-    });
+        if (data && data.body && data.body.is_playing) {
+          spotifyApi.pause({ device_id: deviceid });
+          setIsPlaying(false);
+        } else {
+          if(!currentTrackId){
+            spotifyApi.play({
+              uris : [fistItemTrack.uri],
+              device_id : deviceid
+            })
+            setIsPlaying(true);
+            setCurrentTrackId(fistItemTrack.id);      
+          } else{
+            spotifyApi.play({ device_id: deviceid });
+            setIsPlaying(true);
+          }         
+        }
+      });
   };
-
 
   useEffect(() => {
     if (spotifyApi.getAccessToken && !currentTrackId) {
@@ -65,18 +77,17 @@ function Player() {
 
   }, [currentTrackIdState, spotifyApi, session])
 
-
   useEffect(() => {
     if (volume > 0 && volume < 100) {
       debouncedAdjustVolume(volume);
     }
-
   }, [volume])
 
 
   const debouncedAdjustVolume = useCallback(
     debounce((volume) => {
-      spotifyApi.setVolume(volume).catch((e) => {})
+      console.log(volume);
+      spotifyApi.setVolume(volume).catch((e) => { })
     }, 500),
     []
   );

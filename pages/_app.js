@@ -3,13 +3,15 @@ import 'tailwindcss/tailwind.css';
 import { SessionProvider } from "next-auth/react";
 import { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
-
+import { SpotifySDKContextProvider } from "../contexts/SpotifySDKContext";
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   return (
     <SessionProvider session={session}>
       <RecoilRoot>
-        <Component {...pageProps} />
+        <SpotifySDKContextProvider>
+          <Component {...pageProps} />
+        </SpotifySDKContextProvider>
       </RecoilRoot>
     </SessionProvider>
   )

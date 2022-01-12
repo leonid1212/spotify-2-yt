@@ -3,7 +3,7 @@ import {millisToMinutesAndSeconds} from "../lib/time";
 import { useRecoilState } from 'recoil';
 import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
 
-export default function Song({ track, order }) {
+export default function Song({ track, order, deviceid }) {
   const spotifyApi = useSpotify();
   const [currentTrackId, setCurrentTrackId   ] = useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying   ] = useRecoilState( isPlayingState);
@@ -11,8 +11,10 @@ export default function Song({ track, order }) {
   const playSong = () =>{
     setCurrentTrackId(track.track.id);
     setIsPlaying(true);
+    
     spotifyApi.play({
       uris : [track.track.uri],
+      device_id : deviceid
     })
   }
   
