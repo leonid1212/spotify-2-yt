@@ -10,7 +10,7 @@ export const SpotifySDKContextProvider = ({ children }) => {
 
   const check = router.pathname !== "/login" && deviceid;
    if(check){
-    provider =  {"loading" :  loading , "deviceid" : deviceid };
+    provider = {"loading" :  loading , "deviceid" : deviceid };
    }
 
 
@@ -21,6 +21,6 @@ export const SpotifySDKContextProvider = ({ children }) => {
   );
 };
 
-export const  useSpotifySDKContext = () => {
+export const useSpotifySDKContext = () => {
   return useContext(SpotifySDKContext);
 }

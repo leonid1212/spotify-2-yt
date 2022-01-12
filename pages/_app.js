@@ -1,7 +1,6 @@
 import '../styles/globals.css'
 import 'tailwindcss/tailwind.css';
 import { SessionProvider } from "next-auth/react";
-import { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 import { SpotifySDKContextProvider } from "../contexts/SpotifySDKContext";
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
