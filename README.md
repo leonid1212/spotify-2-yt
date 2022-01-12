@@ -32,11 +32,11 @@ A cool spotify clone
 Add .env.local at the base of the app
 ```
 NEXTAUTH_URL=http://localhost:3000
-```
+
 NEXT_PUBLIC_CLIENT_SECRET=[premium_spotify_client_secret]
-```
+
 NEXT_PUBLIC_CLIENT_ID=[premium_spotify_client_id]
-```
+
 JWT_SECRET=some_super_secret_value
 
 
