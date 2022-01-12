@@ -29,4 +29,11 @@ Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&ut
 =======
 # spotify-2-yt
 A cool spotify clone 
->>>>>>> 209f135ad0c51d7797709b3f3e9a95f37cd15395
+Add .env.local at the base of the app
+
+NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_CLIENT_SECRET=[premium_spotify_client_secret]
+NEXT_PUBLIC_CLIENT_ID=[premium_spotify_client_id]
+JWT_SECRET=some_super_secret_value
+
+
