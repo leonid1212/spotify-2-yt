@@ -28,6 +28,7 @@ yarn create next-app --example with-tailwindcss with-tailwindcss-app
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 =======
 # spotify-2-yt
+```
 A cool spotify clone 
 Add .env.local at the base of the app
 
