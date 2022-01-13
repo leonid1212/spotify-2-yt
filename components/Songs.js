@@ -11,7 +11,6 @@ export default function Songs() {
   const { deviceid, loading } = useSpotifySDKContext();
  
   return (
-    (!deviceid) ? <Loader/> :
       <div className="px-8 flex-col space-y-1 pb-28 text-white ">
         {
           playList?.tracks.items.map((track, i) => (
